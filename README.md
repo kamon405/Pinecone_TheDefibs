@@ -26,7 +26,7 @@ pinecone-client,
 pandas,
 numpy,
 keras,
-tensorflow,
+tensorflow
 
 You can install them using pip:
 
