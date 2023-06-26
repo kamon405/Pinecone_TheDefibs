@@ -21,12 +21,12 @@ Ensure you have Python 3.7 or newer installed on your machine.
 
 You will need the following Python libraries:
 
-flask
-pinecone-client
-pandas
-numpy
-keras
-tensorflow
+flask,
+pinecone-client,
+pandas,
+numpy,
+keras,
+tensorflow,
 
 You can install them using pip:
 
