@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HeartQuest</title>
+    <style>
+      /* Add your CSS here */
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+      console.log(localStorage.getItem('gameWon'));  
+      window.onload = function() {
+        var gameButton = document.getElementById("game-button");
+        var recommendationButton = document.getElementById("recommendation-button");
+        var userInput = document.getElementById("user-input");
+        var results = document.getElementById("results");
+        var gameCompleted = false;
+
+        gameButton.addEventListener('click', function() {
+          // Call your 'play_game' function here. Once the game is over, set 'gameCompleted' to true
+          gameCompleted = true;
+          recommendationButton.disabled = !gameCompleted;
+        });
+
+        recommendationButton.addEventListener('click', function() {
+          var userId = userInput.value;
+
+          // Perform validation on 'userId' here if needed
+
+          fetch('http://127.0.0.1:5000/:5000/recommendations', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({user_id: userId}),
+          })
+          .then(response => response.json())
+          .then(data => {
+            results.textContent = data.join(', ');
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>HeartQuest</h1>
+    <img src="logo.png" alt="Logo" />
+    <input id="user-input" type="user_id" placeholder="Enter your user ID Number 1-50" />
+    <button id="play-button">Play Game</button>
+    <button id="recommendation-button" disabled>Get Recommendations</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    window.onload = function() {
+        var gameWon = localStorage.getItem('gameWon');
+        if (gameWon === 'true') {
+            var button = document.getElementById('recommendation-button');
+            button.disabled = false;
+        }
+
+        $("#play-button").click(function(){
+            window.location.href = "/play_game";
+        });
+
+        $("#recommendation-button").click(function(){
+            var userId = $("#user-input").val();
+
+            $.ajax({
+                url: "/recommendations",
+                type: "POST",
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify({ user_id: userId }),
+                console.log("Received data: ", data);
+                success: function (data) {
+                    if (data.error) {
+                        $("#results").text(data.error);
+                        alert("No recommendations found for this user.");
+                    } else {
+                        $("#results").text(data.join(', '));
+                        alert("Recommendations found: " + data.join(', '));
+                    }
+                }
+            });
+        });
+    };
+    </script>
+
+    <p id="results"></p>
+  </body>
+</html>
