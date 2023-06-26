@@ -38,7 +38,7 @@ The recommendation system requires an API key for the Pinecone machine learning 
 
 Please note that due to a current issue with the Pinecone Python client during the compilation process, the executable version of the application (app.exe) only includes the interactive game and does not include the machine learning recommendation system.
 
-However, you can still run the full functionality of HeartQuest (exlcuding the recommendation system) by running the Python scripts included in this repository. To do so, simply enter your Pinecone API key into the scripts as indicated, then run them using your Python interpreter.
+However, you can still run the full functionality of HeartQuest (including the recommendation system) by running the Python scripts included in this repository. To do so, simply enter your Pinecone API key into the scripts as indicated, then run them using your Python interpreter.
 
 ### Usage
 
