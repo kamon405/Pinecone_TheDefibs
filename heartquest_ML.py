@@ -14,7 +14,6 @@ class MLModel:
         self.file_path = file_path
         self.index_name = index_name
         self.top_k = top_k
-        #pinecone.deployment_config.api_key = "6b8363cc-67ab-4e40-82ae-bcaf6fd831bf"
         pinecone.init(api_key="api-key-here", environment="environment-name-here")
 
         
